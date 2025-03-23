@@ -4,9 +4,8 @@ public class Operaciones {
     private double num2;
 
     //Constructor
-    public Operaciones(double num1, double num2) {
-        this.num1 = num1;
-        this.num2 = num2;
+    public Operaciones() {
+
     }
 
     //Getters - Setters
@@ -37,5 +36,47 @@ public class Operaciones {
 
     //Métodos - Operaciones
 
+    /**
+     * Metodo para sumar dos números
+     * @param num1
+     * @param num2
+     * @return
+     */
+    public double sumar(double num1, double num2) {
+        return num1 + num2;
+    }
+
+    /**
+     * Metodo para restar dos números
+     * @param num1
+     * @param num2
+     * @return
+     */
+    public double restar(double num1, double num2) {
+        return num1 - num2;
+    }
+
+    /**
+     * Metodo para multiplicar dos números
+     * @param num1
+     * @param num2
+     * @return
+     */
+    public double multiplicar(double num1, double num2) {
+        return num1 * num2;
+    }
+
+    /**
+     * Metodo para dividir dos números
+     * @param num1
+     * @param num2
+     * @return
+     */
+    public double dividir(double num1, double num2) {
+        if (num2 == 0) {
+            throw new ArithmeticException("ERROR. No se puede dividir por cero (0).");
+        }
+        return num1 / num2;
+    }
 
 }
