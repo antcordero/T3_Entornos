@@ -73,9 +73,6 @@ public class Operaciones {
      * @return
      */
     public double dividir(double num1, double num2) {
-        if (num2 == 0) {
-            throw new ArithmeticException("ERROR. No se puede dividir por cero (0).");
-        }
         return num1 / num2;
     }
 

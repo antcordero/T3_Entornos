@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Calculadora {
@@ -7,81 +6,70 @@ public class Calculadora {
         Scanner sc = new Scanner(System.in);
 
         Operaciones operacion = new Operaciones();
-        int opcion = 0;
+        int opcion;
+        double num1;
+        double num2;
 
         do {
             System.out.println("\nSeleccione una opción:");
             System.out.println("1 - Sumar\n2 - Restar\n3 - Multiplicar\n4 - Dividir\n5 - Salir");
             System.out.print("\t-> ");
+            opcion = sc.nextInt();
 
-            try {
-                opcion = sc.nextInt();
+            if (opcion < 1 || opcion > 5) {
+                System.out.println("\nOpcion no valida - Seleccione una opcion correcta");
+            } else {
 
-                if (opcion >= 1 && opcion <= 4) {
+                switch (opcion) {
+                    //Suma
+                    case 1:
+                        System.out.print("Numero1: ");
+                        num1 = sc.nextDouble();
+                        System.out.print("Numero2: ");
+                        num2 = sc.nextDouble();
+                        System.out.println("Resultado = " + operacion.sumar(num1, num2));
+                        break;
 
-                    double[] numeros = pedirNumeros(sc);
-                    double num1 = numeros[0];
-                    double num2 = numeros[1];
+                    //Resta
+                    case 2:
+                        System.out.print("Numero1: ");
+                        num1 = sc.nextDouble();
+                        System.out.print("Numero2: ");
+                        num2 = sc.nextDouble();
+                        System.out.println("Resultado = " + operacion.restar(num1, num2));
+                        break;
 
-                    switch (opcion) {
-                        case 1:
-                            System.out.println("Resultado = " + operacion.sumar(num1, num2));
-                            break;
-                        case 2:
-                            System.out.println("Resultado = " + operacion.restar(num1, num2));
-                            break;
-                        case 3:
-                            System.out.println("Resultado = " + operacion.multiplicar(num1, num2));
-                            break;
-                        case 4:
-                            try {
-                                System.out.println("Resultado = " + operacion.dividir(num1, num2));
-                            } catch (ArithmeticException e) {
-                                System.out.println("ERROR: " + e.getMessage());
-                            }
-                            break;
-                    }
-                } else if (opcion == 5) {
-                    System.out.println("\nSaliendo...\n");
-                } else {
-                    System.out.println("Opción no válida. Intente de nuevo.");
+                    //Multiplicación
+                    case 3:
+                        System.out.print("Numero1: ");
+                        num1 = sc.nextDouble();
+                        System.out.print("Numero2: ");
+                        num2 = sc.nextDouble();
+                        System.out.println("Resultado = " + operacion.multiplicar(num1, num2));
+                        break;
+
+                    //División
+                    case 4:
+                        System.out.print("Numero1: ");
+                        num1 = sc.nextDouble();
+                        System.out.print("Numero2: ");
+                        num2 = sc.nextDouble();
+
+                        if (num2 == 0) {
+                            System.out.println("ERROR: No se puede dividir por cero");
+                        } else {
+                            System.out.println("Resultado = " + operacion.dividir(num1, num2));
+                        }
+                        break;
+
+                    //Fin
+                    case 5:
+                        System.out.println("\nSaliendo...\n");
+                        break;
                 }
-
-            } catch (InputMismatchException e) {
-                System.out.println("ERROR: Debe ingresar un número válido.");
-                sc.next();
             }
-
         } while (opcion != 5);
 
         sc.close();
     }
-
-
-    /**
-     * Función para pedir los números por teclado. Error de input controlado
-     * @param sc
-     * @return
-     */
-    private static double[] pedirNumeros(Scanner sc) {
-        double[] numeros = new double[2];
-
-        for (int i = 0; i < 2; i++) {
-            boolean entradaValida = false;  // Variable de control
-
-            while (!entradaValida) {
-                try {
-                    System.out.print((i + 1) + "º número: ");
-                    numeros[i] = sc.nextDouble();
-                    entradaValida = true;  // Cambiamos la variable para salir del while
-                } catch (InputMismatchException e) {
-                    System.out.println("ERROR: Debe ingresar un número válido.");
-                    sc.next();  // Limpiar la entrada incorrecta
-                }
-            }
-        }
-
-        return numeros;
-    }
-
 }
